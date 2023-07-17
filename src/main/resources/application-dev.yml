@@ -1,0 +1,94 @@
+server: 
+   port: 8080
+   tomcat:
+    max-threads: 2500
+    max-connections: 20000
+    min-spare-threads: 20
+    accept-count: 500
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss #时间戳统一转换
+    time-zone: GMT+8 #这个是时区，一定要加，否则会默认为格林尼治时间，即少8小时
+  application: 
+    name: couponservice
+  freemarker:
+    charset: UTF-8
+    content-type: text/html; charset=utf-8
+    request-context-attribute: request
+    suffix: .html
+    template-loader-path: classpath:/templates
+  redis:
+    host: 192.168.0.107  # Redis服务器地址
+    password: "tiyiyunshun@!1232"   # "012345"  
+    database: 0  # Redis数据库索引（默认为0）
+    port: 6379 #32303
+    lettuce:
+      pool:
+        max-active: 8  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 0  # 连接池中的最大空闲连接
+        #timeout: 0  #连接超时时间（毫秒）
+  cache:
+    name: buyNowChache
+    expire-time: 200 #缓存过期时间     
+  datasource: 
+       mysql:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         driverClassName: com.mysql.cj.jdbc.Driver
+         filters: stat,wall,slf4j
+         initialSize: 1
+         logSlowSql: false
+         loginPassword: AQWS1234
+         loginUserInfoEntityname: root
+         maxActive: 3
+         maxWait: 10000
+         minEvictableIdleTimeMillis: 300000
+         minIdle: 1
+         testOnBorrow: false
+         testOnReturn: false
+         testWhileIdle: true
+         timeBetweenEvictionRunsMillis: 60000
+         type: com.alibaba.druid.pool.DruidDataSource
+         url: jdbc:mysql://192.168.0.107:3306/db_tiyiyunshun?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+         UserInfoEntityname: tiyiyunshun
+         password: tiyiyunshun@123~888.
+         validationQuery: SELECT 1 FROM DUAL
+         poolPreparedStatements: false
+         maxOpenPreparedStatements: 100
+
+
+sso:
+  app:
+    id: server1
+    secret: 123456
+  server:
+    url: http://192.168.0.107:8080  #sso服務端地址
+  session:
+    manager: redis
+  timeout: 2592000 #30天session和刷新令牌的过期时间 注：accessToken 令牌的有效期只有该时间的一半
+
+  
+weixin: 
+  appid: wx41824ffce4a9d3ac
+  secret: ee452041ca9911f3edde3793ed2fc129
+  
+# 支付宝配置  https://open.alipay.com/
+ali: 
+  # 支付宝分配给开发者的应用ID
+  appId: 2021003195614065
+  # 使用 支付宝开放平台开发助手 生成的应用私钥 格式 RSA2
+  merchantPrivateKey: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCV30Y9CjzF7r3dt2Ez2Rvy3kWLWS4mYhlBq/Nrcs7BDMNDzu21m0j0vm0490SJLN57kmqcUyJzGVAMuM0b4z86SLrBU6Su0Xurmj1neMqmhuBVgaak1CAu9uIBQ+LEgB2Qo2144SRIaUcM13yAVX6UqAqMqsFJLZVMxe86Ss2zOIljUDKVStiIbYHs1jDfj1AiRgTLJshtB931r86BbW79euRIR95PR1NW3zOEtLEZS4vwrw42jqTPbUHYgJbQ65aByNedNBSBmHJPV9FDbHD0Zt9ZQouvrmsebZ7CaS6N72oN2LHAS1oix1xvri9+IexaLFLF86RPFkZTuoLN5c6LAgMBAAECggEAWKIQweyaAFyuwL7Ap48QblNxQXXeSyjc0u/EJ5lgGN9ZY3KvNiW9wbAUnAnv6Eg201HF5ulriDJCGyP3eTStoeR9PfQfgpu0zcmL4vOWtWEyrp7cVMJ2vg+XnTPumlNCKNXd2g0cDg7ky/1sTeFB2NyAUKxzXrmsgBjW39x5RjGMjxNI/k7CawMs6zTdXnU6V1jMNtUatGWKeMn9u5zW0/W+j+ZFMuy6XV5pe3YE2aZz2y+kapgND9q6Dl27tbARikuKVQSGB9C9Otg0SW6Wqts89P4Sd+QlbsCmy3PMLgB0VInD/VKOmK67F+R0yclnLe3Ob4xmNfqVavYotYG0cQKBgQD63pG1UKjFKC3K1tQ3YdSUbWU72t80gV4/sTgOiMaqFPIQlpXljo3fjkv2fHlPHLLfq2ucvh/OnNeWOhSL19qVjPSHCo7elNK/mWykfAkHjhK1OxvC6RHTZFQHfNfrzjKtGrvsD2TRkXhm2L0xcTCD3Jnz5rLJPKq6BjHgZ83UvQKBgQCY7+64H0Nd/RHPbgdOxG0lA6fxxhB7McRxPrfhwJjNmGk2JuPwQ5W8lYoDF9mFDHdmVpk4M+ifo+PFAGc/P9kXFLztt6eU4J0izT0Eh6S44DTbjirAOqVUPlHvb48Edt2hFTUMjnHcmkGUMziB/gBDYzYArLFGo9G7lchxEv+45wKBgEa2f+nUz42rUqUPQwhNWidwYo2plyrsoE1hvcRTB3SfrM/CMoRfV1xBduYGlgcXts/XOOEYskyB5z7gJjR45pMrBS4fasAQwQriyz3d/ImVoW5WN/AL1Et6xzjJFu/P0nb6xye1+xwbXg3XYBTUq/EvOHIIgDK7GACRiHORrvIdAoGAfV0H6KOv3CZq6AbANL/s28+AZj4+Gk30QgPwRTxTxQvvCnWcmME9x6UoyVpOcrKCWUAZPqnGQL3eIgkvmPgkYrgcGhxWYUIxbGqiXsk1rFoU2fhScNph1Yl0Lnna2QT6rWUt5AoLqZJEuU+3PU9RNevoQ2tLsaTtcf/Ym1/AgPcCgYATxEB18rXP6PvlxUaV1Rin/HWTdRSLZdUjQum6jAEV0Cuy0SzpRxZQjREfWAK8HyKL3Va+Vb8dwl1h5hcyZ+qj8jufmQLmqkLjV6g0g8VeE0aK32eYPZdPxgGAw2aRF8k5QUVUjo4EvSA71BBgo6Y1b5uztxRuyW0GiBu90feEKw==
+  # 支付宝公钥 (支付宝加签后得到的公钥)
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn9DnW0CltVjxd4LFivC0dtrINaxWuKfFdYLAZLwx+wwfZ/CvGTXbhaQMVGrmRW5AE6vvcbd79Z6pgF7aheQrXQHrKtrCuz7lZhcrsJu7PBrs1E789mSvz2MKjHaeCMHd12TuJL41/Us8Uav/OvIi9EpIoukILYgUaKKmUGIWVTHX0k5OEaZDOwzslENLLL4s0I/c7kVtOzNs87QUD/pK84RUvfE7BqutZ9adejNpvPDMtDdMmWvtX2oqi14kaOc5BzS6ub1T1MRaGza+CHtrsRYybkeYLPjvTqSt8HJzxT7kPARgfWjvweEr1FfI99Dj7NGJzXfq+gw8ymMaHHIiGwIDAQAB
+  # 签名方式
+  signType: RSA2
+  # 字符编码格式
+  charset: UTF-8
+  # 字符编码格式
+  format: json
+  # 支付宝网关
+  gatewayUrl: https://openapi.alipay.com/gateway.do
+  
+  #用户默认头像
+defaultavatar: https://tyyunshun.com/Permerchant/Logo/default-avatar.jpg
