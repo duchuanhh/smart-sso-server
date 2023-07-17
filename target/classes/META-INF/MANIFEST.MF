@@ -1,10 +1,6 @@
 Manifest-Version: 1.0
 Implementation-Title: smart-sso-server
-Implementation-Version: 2.1.1
-Built-By: admin
-Implementation-Vendor-Id: com.smart
-Build-Jdk: 1.8.0_171
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/smart-sso/smart-sso-server
+Implementation-Version: 2.1.9.RELEASE
+Build-Jdk-Spec: 1.8
 Created-By: Maven Integration for Eclipse
 
