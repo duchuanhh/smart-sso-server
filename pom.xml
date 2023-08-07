@@ -13,7 +13,7 @@
 	<name>${project.artifactId}</name>
 	
 	<properties>
-		<com.tiyiyun.buy.client>0.0.7</com.tiyiyun.buy.client>
+		<com.tiyiyun.buy.client>0.0.8</com.tiyiyun.buy.client>
 		<spring-mybatis.version>1.3.2</spring-mybatis.version>
 		<com.alibaba.druid.version>1.0.31</com.alibaba.druid.version>
 		<skipTests>true</skipTests>
@@ -63,6 +63,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>

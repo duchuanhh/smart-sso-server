@@ -47,7 +47,7 @@ public class UserInfoService {
 	}
 	
 	public UserInfoEntity deviceNoLogin(String deviceNo, String smsCode) throws Exception{
-		String key = "fixture-SMS-CODE-"+deviceNo;
+		String key = "fixture-SMS-CODE:"+deviceNo;
 		String value = StringRedisTemplateService.get(key);
 		if(StringUtils.isBlank(value) || !smsCode.equals(value)) {
 			throw new DomainOperationException("验证码有误或已过期！");
@@ -56,6 +56,9 @@ public class UserInfoService {
 		if(userInfo != null) {
 			if(userInfo.getIsDelete() == 1) {
 				userInfoMapper.updateByPrimaryKeySelective(UserInfoEntity.builder().id(userInfo.getId()).isDelete(0).build());
+			}
+			if(userInfo.getIsDelete() == 2) {
+				throw new DomainOperationException("您已被拉黑！");
 			}
 			return userInfo;
 		}else {

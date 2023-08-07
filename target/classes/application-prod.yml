@@ -20,7 +20,7 @@ spring:
     template-loader-path: classpath:/templates
   redis:
     host: 139.224.80.217  # Redis服务器地址
-    password: "tiyiyunshun@!1232"   # "012345"  
+    password: "tyys2341"   # "012345"  
     database: 0  # Redis数据库索引（默认为0）
     port: 6379 #32303
     lettuce:

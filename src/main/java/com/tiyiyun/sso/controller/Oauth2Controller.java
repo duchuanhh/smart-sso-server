@@ -114,15 +114,15 @@ public class Oauth2Controller {
 	
 	private Result<Void> validateParam(Integer grantType, String code, String smsCode) {
 		if (grantType == null) {
-			return Result.createError("grantType不能为空");
+			return Result.createError("grantType不能为空!");
 		}
 		
 		if (grantType == 2 && StringUtils.isEmpty(code)) {
-			return Result.createError("第三方授权码不能为空");
+			return Result.createError("第三方授权码不能为空!");
 		}
 		
 		if (grantType == 1 && StringUtils.isEmpty(smsCode)) {
-			return Result.createError("短信验证码不能为空");
+			return Result.createError("短信验证码不能为空!");
 		}
 		return Result.success();
 	}
